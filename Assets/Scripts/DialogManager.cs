@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class DialogManager : MonoBehaviour
 {
+    const int FIRST_CHILD = 0;
 
     public Question currentQuestion;
     public Answer currentAnswer;
@@ -14,6 +17,7 @@ public class DialogManager : MonoBehaviour
         //update the view with the first question, in this case of start, moveNext
         //is really "move first"
         currentQuestion.moveNext();
+        
     }
 
     // Update is called once per frame
@@ -22,26 +26,13 @@ public class DialogManager : MonoBehaviour
         
     }
 
-    public void answerAClicked()
+   
+    public void answerClicked(int whichAnswer)
     {
-        Debug.Log("answerA selected");
-        //first child is index 0 answer A, make it current answer
-        currentAnswer = currentQuestion.transform.GetChild(0).GetComponent<Answer>();
+        currentAnswer = currentQuestion.transform.GetChild(whichAnswer).GetComponent<Answer>();
         //the current question will now be the current answer's question
-        currentQuestion = currentAnswer.transform.GetChild(0).GetComponent<Question>();
+        currentQuestion = currentAnswer.transform.GetChild(FIRST_CHILD).GetComponent<Question>();
         //update view aka move to next question
         currentQuestion.moveNext();
-
-    }
-    public void answerBClicked()
-    {
-        Debug.Log("answer B clicked");
-        //second child is index 1 answer B, make it current answer
-        currentAnswer = currentQuestion.transform.GetChild(1).GetComponent<Answer>();
-        //the current question will now be the current answer's question
-        currentQuestion = currentAnswer.transform.GetChild(0).GetComponent<Question>();
-        //update view aka move to next question
-        currentQuestion.moveNext();
-
     }
 }

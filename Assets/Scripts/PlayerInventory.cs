@@ -96,4 +96,17 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
+    public bool hasTheKey(GameObject thekey)
+    {
+        foreach(Transform invObj in items)
+        {
+
+            if (invObj != null && invObj.gameObject == thekey)
+                return true;
+        }
+
+
+        return false;
+    }
+
 }
